@@ -1,0 +1,216 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="row">
+  <!-- Code Editor Section -->
+  <div class="col-lg-6 mb-4">
+    <div class="card cosmic-card">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h2 class="card-title mb-0">
+          <i class="fas fa-code me-2"></i>Code Editor
+        </h2>
+        <div class="language-selector">
+          <select id="language-select" class="form-select cosmic-select">
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="java">Java</option>
+            <option value="csharp">C#</option>
+            <option value="php">PHP</option>
+            <option value="ruby">Ruby</option>
+            <option value="go">Go</option>
+            <option value="swift">Swift</option>
+          </select>
+        </div>
+      </div>
+      <div class="card-body">
+        <div id="code-editor"></div>
+        <div class="mt-3 d-flex justify-content-between">
+          <div class="ai-model-selector">
+            <label class="form-label">AI Model:</label>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="aiModel"
+                id="cerebras-model"
+                value="cerebras"
+                checked
+              />
+              <label class="form-check-label" for="cerebras-model">
+                <i class="fas fa-robot me-1"></i> Cerebras AI
+              </label>
+            </div>
+          </div>
+          <button id="clear-code" class="btn btn-outline-danger">
+            <i class="fas fa-trash me-1"></i> Clear
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analysis Options -->
+    <div class="analysis-options mt-4">
+      <div class="card cosmic-card">
+        <div class="card-header">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-magic me-2"></i>AI Powers
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <button class="btn cosmic-btn analysis-btn" data-type="explain">
+              <i class="fas fa-comment-dots me-1"></i> Explain
+            </button>
+            <button class="btn cosmic-btn analysis-btn" data-type="optimize">
+              <i class="fas fa-bolt me-1"></i> Optimize
+            </button>
+            <button class="btn cosmic-btn analysis-btn" data-type="debug">
+              <i class="fas fa-bug me-1"></i> Debug
+            </button>
+            <button class="btn cosmic-btn analysis-btn" data-type="document">
+              <i class="fas fa-file-alt me-1"></i> Document
+            </button>
+            <button class="btn cosmic-btn analysis-btn" data-type="security">
+              <i class="fas fa-shield-alt me-1"></i> Security Review
+            </button>
+          </div>
+          <div class="text-center mt-3">
+            <div class="cosmic-orbit">
+              <div class="cosmic-core"></div>
+              <div class="cosmic-path cosmic-path-1">
+                <div class="cosmic-moon"></div>
+              </div>
+              <div class="cosmic-path cosmic-path-2">
+                <div class="cosmic-moon"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Response Section -->
+  <div class="col-lg-6">
+    <div class="card cosmic-card">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h2 class="card-title mb-0">
+          <i class="fas fa-comment-alt me-2"></i>AI Response
+        </h2>
+        <div class="response-actions">
+          <button
+            id="copy-response"
+            class="btn btn-sm cosmic-btn-sm"
+            title="Copy to clipboard"
+          >
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div id="loading-indicator" class="text-center py-5 d-none">
+          <div class="cosmic-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-planet"></div>
+            <p class="mt-3">Traversing the coding cosmos...</p>
+          </div>
+        </div>
+        <div id="response-container" class="response-content">
+          <div class="welcome-message">
+            <h3><i class="fas fa-star me-2"></i>Welcome to SpaceCode AI</h3>
+            <p>
+              Your cosmic coding assistant is ready to help you explore the
+              universe of code!
+            </p>
+            <div class="cosmic-steps">
+              <div class="step">
+                <div class="step-icon"><i class="fas fa-edit"></i></div>
+                <div class="step-text">Write or paste your code in the editor
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-icon"><i class="fas fa-magic"></i></div>
+                <div class="step-text">Select an AI power to apply</div>
+              </div>
+              <div class="step">
+                <div class="step-icon"><i class="fas fa-lightbulb"></i></div>
+                <div class="step-text">Get instant AI-powered insights</div>
+              </div>
+            </div>
+            <p class="mt-4">
+              Powered by Cerebras AI - a completely free service!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="card cosmic-card mt-4">
+      <div class="card-header">
+        <h3 class="card-title mb-0">
+          <i class="fas fa-history me-2"></i>Recent Activity
+        </h3>
+      </div>
+      <div class="card-body p-0">
+        <div id="history-container" class="history-list">
+          <div class="text-center py-4">
+            <p class="mb-0">
+              <i class="fas fa-satellite me-2"></i>Your coding journey history
+              will appear here
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% raw %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    loadHistory();
+  });
+
+  function loadHistory() {
+    fetch("/api/history")
+      .then((response) => response.json())
+      .then((data) => {
+        const container = document.getElementById("history-container");
+        container.innerHTML = ""; // Clear any old entries
+
+        if (data.error) {
+          container.innerHTML = `<p class="text-red-500">Error loading history: ${data.error}</p>`;
+          return;
+        }
+
+        if (data.length === 0) {
+          container.innerHTML =
+            '<p class="text-gray-500">No recent activity found.</p>';
+          return;
+        }
+
+        data.forEach((entry) => {
+          const item = document.createElement("div");
+          item.className = "p-4 border-b border-gray-200";
+
+          item.innerHTML = `
+                      <div class="font-semibold text-indigo-600">${entry.language} - ${entry.request_type}</div>
+                      <pre class="bg-gray-100 text-sm p-2 rounded mt-1">${entry.code}</pre>
+                      <div class="text-gray-400 text-xs mt-1">${entry.timestamp}</div>
+                  `;
+          container.appendChild(item);
+        });
+      })
+      .catch((error) => {
+        console.error("Error loading history:", error);
+        document.getElementById("history-container").innerHTML =
+          '<p class="text-red-500">Failed to load history.</p>';
+      });
+  }
+</script>
+
+{% endraw %} {% endblock %}
