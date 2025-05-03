@@ -10,7 +10,7 @@ As a space ethusiast from the very beginning I thought why not mix AI and space.
 - **Flask Framework**: A lightweight framework to build web applications in Python.
 - **SQLAlchemy**: A Python ORM to interact with databases.
 - **Gunicorn**: A Python WSGI HTTP server for running the Flask app.
-- **Deployment**: Instructions for deploying the app on various platforms like Render, Heroku, etc.
+- **Deployment**: On Render.
 
 ## Prerequisites
 
@@ -46,5 +46,25 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
+# 3. Install Deependencies
+```
+pip install -r requirements.txt
+
+```
+
+# 4 Run Locally
+```
+python main.py
+
+```
+# 5 Requirements.txt
+``` bash
+Flask==2.3.2
+SQLAlchemy==1.4.49
+gunicorn==21.2.0
 
 
+```
+
+
+🙋‍♀️ Author - Twinkle Twinkle Little Star
