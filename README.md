@@ -24,40 +24,40 @@ Before deploying or running the app locally, make sure you have the following in
 
 ### Step 1: Clone the Repository
 
-Clone the repository to your local machine:
+### Clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/Shrutakeerti/SpaceCode-AI.git
 cd SpaceCode-AI
 ```
 
-# Create a virtual environment
+### Create a virtual environment
 ```bash
 python -m venv venv
 ```
 
-# Activate the virtual environment
-# For Windows
+### Activate the virtual environment
+## For Windows
 ```
 venv\Scripts\activate
 ```
-# For macOS/Linux
+## For macOS/Linux
 ```
 source venv/bin/activate
 ```
 
-# 3. Install Deependencies
+## 3. Install Deependencies
 ```
 pip install -r requirements.txt
 
 ```
 
-# 4 Run Locally
+## 4 Run Locally
 ```
 python main.py
 
 ```
-# 5 Requirements.txt
+## 5 Requirements.txt
 ``` bash
 Flask==2.3.2
 SQLAlchemy==1.4.49
