@@ -1,4 +1,4 @@
-# Flask App Deployment Project
+# SpaceCode AI
 
 This is a simple Flask application that demonstrates how to deploy a Python web app using **Gunicorn** and **Flask**. The app is structured with Flask and SQLAlchemy, and it is designed to be deployed on cloud platforms like **Render**, **Heroku**, or **Glitch**.
 
@@ -29,7 +29,7 @@ Clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/Shrutakeerti/SpaceCode-AI.git
-cd Shrutakeerti/SpaceCode-AI
+cd SpaceCode-AI
 ```
 
 # Create a virtual environment
