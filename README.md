@@ -1,6 +1,5 @@
 # SpaceCode AI
-
-This is a simple Flask application that demonstrates how to deploy a Python web app using **Gunicorn** and **Flask**. The app is structured with Flask and SQLAlchemy, and it is designed to be deployed on cloud platforms like **Render**, **Heroku**, or **Glitch**.
+As a space ethusiast from the very beginning I thought why not mix AI and space.
 
 ![App Screenshot](https://github.com/Shrutakeerti/DSA-Prep/blob/main/WhatsApp%20Image%202025-05-03%20at%209.46.09%20AM.jpeg)
 
