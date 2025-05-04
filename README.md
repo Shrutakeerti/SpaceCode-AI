@@ -1,8 +1,7 @@
 # SpaceCode AI
 As a space ethusiast from the very beginning I thought why not mix AI and space.
 
-![App Screenshot](https://github.com/Shrutakeerti/DSA-Prep/blob/main/WhatsApp%20Image%202025-05-03%20at%209.46.09%20AM.jpeg)
-
+![App Screenshot](https://github.com/Shrutakeerti/NFT-Challenge/blob/main/WhatsApp%20Image%202025-05-03%20at%209.46.09%20AM%20(1).jpeg)
 
 
 ## Features
